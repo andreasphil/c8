@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>C8 Demo</title>
+
+    <style>
+      body {
+        font-family: ui-sans, sans-serif;
+        font-size: 1.05em;
+        line-height: 1.5em;
+        margin: auto;
+        max-width: 70ch;
+        padding: 4rem 1rem;
+        > :first-child {
+          margin-top: 0;
+        }
+        > :last-child {
+          margin-bottom: 0;
+        }
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin: 2em 0 1rem;
+      }
+      article,
+      blockquote,
+      header,
+      footer,
+      ol,
+      ul,
+      hr,
+      p,
+      pre {
+        margin: 1.5em 0;
+      }
+      *,
+      ::before,
+      ::after {
+        box-sizing: border-box;
+      }
+
+      nav {
+        ul {
+          display: flex;
+          gap: 1rem;
+          list-style-type: none;
+          margin: 1rem 0 3rem;
+          padding: 0;
+        }
+      }
+
+      section {
+        border: 1px solid black;
+        display: none;
+        margin-top: 1rem;
+        padding: 2rem 1rem 1rem;
+        position: relative;
+
+        &:target {
+          display: block;
+        }
+
+        h2 {
+          background-color: white;
+          border: 1px solid black;
+          display: inline-block;
+          font-size: 1rem;
+          line-height: 1;
+          margin: 0;
+          padding: 0.5rem;
+          position: absolute;
+          top: -1rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1>C8 Demo</h1>
+      <nav>
+        <ul>
+          <li><a href="#hello-world">Hello world</a></li>
+          <li><a href="#callout">Callout</a></li>
+          <li><a href="#counter">Counter</a></li>
+        </ul>
+      </nav>
+
+      <section id="hello-world">
+        <h2>Hello world</h2>
+        <c8-hello-world></c8-hello-world>
+      </section>
+
+      <section id="callout">
+        <h2>Callout</h2>
+        <c8-callout title="This is the title!">
+          This is the message.
+        </c8-callout>
+      </section>
+
+      <section id="counter">
+        <h2>Counter</h2>
+        <c8-counter></c8-counter>
+
+        <script>
+          document
+            .querySelector("c8-counter")
+            .addEventListener("increment", (event) => {
+              console.log(event);
+            });
+        </script>
+      </section>
+    </div>
+  </body>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "@/demos/": "./src/demos/"
+      }
+    }
+  </script>
+
+  <script type="module">
+    import { Counter } from "@/demos/counter.js";
+    import { HelloWorld } from "@/demos/hello-world.js";
+    import { Callout } from "@/demos/callout.js";
+  </script>
+</html>
