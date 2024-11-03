@@ -265,17 +265,14 @@ export class C8 extends HTMLElement {
 
         let target = event.target;
         const handlerAttr = `on:${event.type}`;
-        const handlerName = target.dataset[handlerAttr];
         const handlerSelector = `[data-${handlerAttr.replace(":", "\\:")}]`;
 
-        if (handlerName) {
-          // The element itself declares an event handler -> Call
-          this[handlerName]?.(event);
-        } else if ((target = target.closest(handlerSelector))) {
-          // Element does not declare an event handler, but one of its ancestors does
-          // -> Emit the same event again on the ancestor so it can be handled there
-          target.dispatchEvent(new Event(event.type, event));
+        let handlerName = target.dataset[handlerAttr];
+        if (!handlerName && (target = target.closest(handlerSelector))) {
+          handlerName = target.dataset[handlerAttr];
         }
+
+        this[handlerName]?.(event);
       });
     });
   }

@@ -170,3 +170,30 @@ export class Counter extends C8 {
 }
 
 Counter.define();
+
+/* -------------------------------------------------- *
+ * Event delegation                                   *
+ * -------------------------------------------------- */
+
+export class EventDelegation extends C8 {
+  static tag = "c8-events";
+
+  static events = ["keydown"];
+
+  get template() {
+    return html`
+      <div data-on:keydown="logKeydown">
+        <div>You pressed: <span data-ref="log">(no key pressed yet)</span></div>
+        <input />
+      </div>
+    `;
+  }
+
+  /** @param {KeyboardEvent} event  */
+  logKeydown(event) {
+    console.log(event);
+    this.ref("log").textContent = event;
+  }
+}
+
+EventDelegation.define();

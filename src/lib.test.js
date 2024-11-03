@@ -147,16 +147,19 @@ describe("C8", () => {
     let EventsTest;
     const clickHandler = mock.fn();
     const changeHandler = mock.fn();
+    const keydownHandler = mock.fn();
 
     before(() => {
       EventsTest = class EventsTest extends TestC8 {
         static tag = "c8-events";
         static disabledFeatures = ["shadow"];
-        static events = ["click"];
+        static events = ["click", "keydown"];
         get template() {
           return `
-            <button data-on:click="handleClick">Click <span>me</span></button>
-            <input type="text" data-on:change="handleChange" />
+            <div data-on:keydown="handleKeydown">
+              <button data-on:click="handleClick">Click <span>me</span></button>
+              <input type="text" data-on:change="handleChange" />
+            </div>
           `;
         }
         handleClick() {
@@ -164,6 +167,9 @@ describe("C8", () => {
         }
         handleChange() {
           changeHandler();
+        }
+        handleKeydown(event) {
+          keydownHandler(event.key);
         }
       };
 
@@ -198,7 +204,16 @@ describe("C8", () => {
       assert.equal(clickHandler.mock.callCount(), 1);
     });
 
-    test("handles events on elementes inserted after initalization", () => {
+    test("retains original event details when delegating", () => {
+      const { el } = render(EventsTest, `<c8-events></c8-events>`);
+      el.querySelector("input").dispatchEvent(
+        new window.KeyboardEvent("keydown", { bubbles: true, key: "k" })
+      );
+      assert.equal(keydownHandler.mock.callCount(), 1);
+      assert.deepEqual(keydownHandler.mock.calls[0].arguments, ["k"]);
+    });
+
+    test("handles events on elements inserted after initalization", () => {
       const { el } = render(EventsTest, `<c8-events></c8-events>`);
       const button2 = document.createElement("button");
       button2.innerText = "Click me 2";
