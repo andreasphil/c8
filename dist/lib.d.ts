@@ -99,6 +99,7 @@ export class C8<Attrs extends Record<string, any>, Refs extends Record<string, E
      * @type {Attrs}
      */
     attrs: Attrs;
+    connectedCallback(): void;
     /**
      * Returns the element with that ref name. This will throw if no ref with
      * that name was found.
