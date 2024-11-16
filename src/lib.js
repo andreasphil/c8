@@ -156,7 +156,9 @@ export class C8 extends HTMLElement {
       // Shadow root has been disabled. Ignore; light DOM will be used
       // automatically instead.
     }
+  }
 
+  connectedCallback() {
     this.#insertTemplate();
     this.#adoptCss();
     this.#registerAttributes();
