@@ -27,6 +27,7 @@ export class HelloWorld extends C8 {
   }
 
   connectedCallback() {
+    super.connectedCallback();
     this.update();
   }
 
@@ -79,6 +80,7 @@ export class Callout extends C8 {
   }
 
   connectedCallback() {
+    super.connectedCallback();
     this.update();
   }
 
@@ -149,6 +151,7 @@ export class Counter extends C8 {
   }
 
   connectedCallback() {
+    super.connectedCallback();
     this.update();
   }
 
@@ -192,7 +195,7 @@ export class EventDelegation extends C8 {
   /** @param {KeyboardEvent} event  */
   logKeydown(event) {
     console.log(event);
-    this.ref("log").textContent = event;
+    this.ref("log").textContent = event.key;
   }
 }
 
