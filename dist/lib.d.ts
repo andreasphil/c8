@@ -16,6 +16,11 @@
  */
 export function defineAttr<T>(definition: AttrDefinition<T>): AttrDefinition<T>;
 /**
+ * @param {string} template
+ * @returns {Node}
+ */
+export function renderTemplate(template: string): Node;
+/**
  * @param {TemplateStringsArray} strings
  * @param {unknown[]} values
  * @returns {string}
