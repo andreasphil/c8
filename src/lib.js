@@ -47,6 +47,16 @@ export const html = tag;
  */
 export const css = tag;
 
+/**
+ * @param {string} template
+ * @returns {Node}
+ */
+export function renderTemplate(template) {
+  const templateEl = document.createElement("template");
+  templateEl.innerHTML = template;
+  return templateEl.content.cloneNode(true);
+}
+
 /* -------------------------------------------------- *
  * Component base class                               *
  * -------------------------------------------------- */
@@ -228,19 +238,16 @@ export class C8 extends HTMLElement {
   }
 
   #insertTemplate() {
-    let templateEl;
-
     if (this.template.startsWith("#")) {
-      templateEl = document.querySelector(this.template);
+      const templateEl = document.querySelector(this.template);
       if (!(templateEl instanceof HTMLTemplateElement)) {
         throw new Error(`${this.template} is not a template element`);
       }
+      this.#root.appendChild(templateEl.content.cloneNode(true));
     } else {
-      templateEl = document.createElement("template");
-      templateEl.innerHTML = this.template;
+      const templateNode = renderTemplate(this.template);
+      this.#root.appendChild(templateNode);
     }
-
-    this.#root.appendChild(templateEl.content.cloneNode(true));
   }
 
   #adoptCss() {
