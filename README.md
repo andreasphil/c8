@@ -6,8 +6,6 @@
   <strong>Lightweight base class for custom elements</strong>
 </p>
 
-> ⚠️ Work in progress. Things are most certainly incomplete and/or broken, and will definitely change.
-
 - 💥 Opinionated, consistent structure for markup, styles and registration
 - 🗺️ Typed template refs for easy DOM access
 - 🔁 Automatic attribute value conversion and reflection
