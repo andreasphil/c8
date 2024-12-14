@@ -168,7 +168,7 @@ class Example extends C8<ExampleAttrs, ExampleRefs, ExampleEvents> {
 
 ### API
 
-See [lib.d.ts](./dist/lib.d.ts) for all available methods and docs, our check out the [demos](./src/demo.js).
+See [lib.d.ts](./dist/lib.d.ts) for all available methods and docs.
 
 ## Development
 
