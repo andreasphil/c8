@@ -6,13 +6,13 @@ describe("C8", () => {
   /** @type {import("jsdom").DOMWindow} */
   let window;
 
-  /** @type {typeof import("./lib.js").C8} */
+  /** @type {typeof import("./c8.js").C8} */
   let TestC8;
 
   /**
-   * @param {typeof import("./lib.js").C8} component
+   * @param {typeof import("./c8.js").C8} component
    * @param {string} html
-   * @returns {{ container: HTMLBodyElement, el: import("./lib.js").C8 }}
+   * @returns {{ container: HTMLBodyElement, el: import("./c8.js").C8 }}
    */
   function render(component, html) {
     const container = window.document.querySelector("body");
@@ -32,7 +32,7 @@ describe("C8", () => {
     globalThis.HTMLElement = dom.window.HTMLElement;
     globalThis.HTMLTemplateElement = dom.window.HTMLTemplateElement;
 
-    const { C8 } = await import("./lib.js");
+    const { C8 } = await import("./c8.js");
     TestC8 = C8;
   });
 

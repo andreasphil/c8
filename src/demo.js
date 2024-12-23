@@ -1,5 +1,4 @@
-// @ts-check
-import { C8, css, html } from "./lib.js";
+import { C8, css, html } from "./c8.js";
 
 /* -------------------------------------------------- *
  * Hello world                                        *
