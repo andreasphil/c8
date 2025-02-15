@@ -89,7 +89,7 @@ export class C8<Attrs extends Record<string, any>, Refs extends Record<string, E
      * @type {string | undefined}
      * @default undefined
      */
-    get styles(): string;
+    get styles(): string | undefined;
     /**
      * The component's template. This will be inserted into the custom element on
      * initialization.
