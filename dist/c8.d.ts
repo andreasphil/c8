@@ -27,12 +27,6 @@ export function renderTemplate(template: string): Node;
  */
 export function html(strings: TemplateStringsArray, ...values: unknown[]): string;
 /**
- * @param {TemplateStringsArray} strings
- * @param {unknown[]} values
- * @returns {string}
- */
-export function css(strings: TemplateStringsArray, ...values: unknown[]): string;
-/**
  * @template {Record<string, any>} Attrs
  * @template {Record<string, Element>} Refs
  * @template {Record<string, any>} Emits
@@ -81,15 +75,6 @@ export class C8<Attrs extends Record<string, any>, Refs extends Record<string, E
      */
     static get observedAttributes(): string[];
     constructor();
-    /**
-     * The component's stylesheet. This will be added to the shadow DOM's adopted
-     * stylesheets on initialization. Must be `undefined` if shadow DOM is disabled,
-     * otherwise an exception is thrown.
-     *
-     * @type {string | undefined}
-     * @default undefined
-     */
-    get styles(): string | undefined;
     /**
      * The component's template. This will be inserted into the custom element on
      * initialization.
