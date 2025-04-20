@@ -1,6 +1,4 @@
-/* -------------------------------------------------- *
- * Types                                              *
- * -------------------------------------------------- */
+// Types --------------------------------------------------
 
 /**
  * @template T
@@ -15,9 +13,7 @@
  * @typedef {{ [K in keyof T]: AttrDefinition<T[K]> }} Attrs
  */
 
-/* -------------------------------------------------- *
- * Utils                                              *
- * -------------------------------------------------- */
+// Utils --------------------------------------------------
 
 /**
  * @template T
@@ -42,12 +38,6 @@ const tag = (strings, ...values) => String.raw({ raw: strings }, ...values);
 export const html = tag;
 
 /**
- * Helper for CSS template strings. The tag does nothing, but using it will
- * allow syntax highlighting and formatting if your editor supports it.
- */
-export const css = tag;
-
-/**
  * @param {string} template
  * @returns {Node}
  */
@@ -57,9 +47,7 @@ export function renderTemplate(template) {
   return templateEl.content.cloneNode(true);
 }
 
-/* -------------------------------------------------- *
- * Component base class                               *
- * -------------------------------------------------- */
+// Component base class -----------------------------------
 
 /**
  * @template {Record<string, any>} Attrs
@@ -121,18 +109,6 @@ export class C8 extends HTMLElement {
   }
 
   /**
-   * The component's stylesheet. This will be added to the shadow DOM's adopted
-   * stylesheets on initialization. Must be `undefined` if shadow DOM is disabled,
-   * otherwise an exception is thrown.
-   *
-   * @type {string | undefined}
-   * @default undefined
-   */
-  get styles() {
-    return undefined;
-  }
-
-  /**
    * The component's template. This will be inserted into the custom element on
    * initialization.
    *
@@ -170,7 +146,6 @@ export class C8 extends HTMLElement {
 
   connectedCallback() {
     this.#insertTemplate();
-    this.#adoptCss();
     this.#registerAttributes();
     this.#attachEvents();
   }
@@ -248,19 +223,6 @@ export class C8 extends HTMLElement {
       const templateNode = renderTemplate(this.template);
       this.#root.appendChild(templateNode);
     }
-  }
-
-  #adoptCss() {
-    if (!this.styles) return;
-
-    if (!(this.#root instanceof ShadowRoot)) {
-      throw new Error('CSS is not supported when "shadow" is disabled');
-    }
-
-    const styleSheet = new CSSStyleSheet();
-    styleSheet.replaceSync(this.styles);
-
-    this.#root.adoptedStyleSheets.push(styleSheet);
   }
 
   #attachEvents() {

@@ -33,20 +33,20 @@ npm i github:andreasphil/c8#<tag>
 For the most basic component, extend `C8` and specify a `tag` and `template`. You can also add styles:
 
 ```js
-import { C8, html, css } from "c8";
+import { C8, html } from "c8";
 
 class HelloWorld extends C8 {
   static tag = "hello-world";
 
   get template() {
-    return html`<span>Hello world!</span>`;
-  }
+    return html`
+      <style>
+        span {
+          font-weight: bold;
+        }
+      </style>
 
-  get styles() {
-    return css`
-      span {
-        font-weight: bold;
-      }
+      <span>Hello world!</span>
     `;
   }
 }
@@ -132,8 +132,6 @@ class LightDom extends C8 {
   static disabledFeatures = ["shadow"];
 }
 ```
-
-Note that `get styles()` must return `undefined` when light DOM is used, since this feature uses adopted stylesheets on the shadow DOM.
 
 ### TypeScript
 

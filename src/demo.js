@@ -1,8 +1,6 @@
-import { C8, css, html } from "./c8.js";
+import { C8, html } from "./c8.js";
 
-/* -------------------------------------------------- *
- * Hello world                                        *
- * -------------------------------------------------- */
+// Hello world --------------------------------------------
 
 export class HelloWorld extends C8 {
   static tag = "c8-hello-world";
@@ -11,18 +9,14 @@ export class HelloWorld extends C8 {
     name: { parse: String, default: () => "world" },
   };
 
-  get styles() {
-    return css`
-      .name {
-        font-weight: bold;
-      }
-    `;
-  }
-
   get template() {
-    return html`<span>
-      Hello, <span class="name" data-ref="name"></span>!
-    </span>`;
+    return html`<style>
+        .name {
+          font-weight: bold;
+        }
+      </style>
+
+      <span>Hello, <span class="name" data-ref="name"></span>!</span>`;
   }
 
   connectedCallback() {
@@ -41,9 +35,7 @@ export class HelloWorld extends C8 {
 
 HelloWorld.define();
 
-/* -------------------------------------------------- *
- * Callout                                            *
- * -------------------------------------------------- */
+// Callout ------------------------------------------------
 
 export class Callout extends C8 {
   static tag = "c8-callout";
@@ -52,30 +44,28 @@ export class Callout extends C8 {
     title: { parse: String },
   };
 
-  get styles() {
-    return css`
-      .callout {
-        border-left: 4px solid skyblue;
-        padding: 0.75rem 1rem;
-        background: color-mix(in srgb, skyblue, transparent 80%);
-
-        p {
-          margin: 0;
-        }
-
-        .title {
-          font-weight: bold;
-          color: color-mix(in srgb, skyblue, black 50%);
-        }
-      }
-    `;
-  }
-
   get template() {
-    return html`<div class="callout">
-      <p class="title" data-ref="title"></p>
-      <slot />
-    </div>`;
+    return html`<style>
+        .callout {
+          border-left: 4px solid skyblue;
+          padding: 0.75rem 1rem;
+          background: color-mix(in srgb, skyblue, transparent 80%);
+
+          p {
+            margin: 0;
+          }
+
+          .title {
+            font-weight: bold;
+            color: color-mix(in srgb, skyblue, black 50%);
+          }
+        }
+      </style>
+
+      <div class="callout">
+        <p class="title" data-ref="title"></p>
+        <slot />
+      </div>`;
   }
 
   connectedCallback() {
@@ -95,9 +85,7 @@ export class Callout extends C8 {
 
 Callout.define();
 
-/* -------------------------------------------------- *
- * Counter                                            *
- * -------------------------------------------------- */
+// Counter ------------------------------------------------
 
 export class Counter extends C8 {
   static tag = "c8-counter";
@@ -108,45 +96,41 @@ export class Counter extends C8 {
     value: { parse: Number, default: () => "1" },
   };
 
-  get styles() {
-    return css`
-      :host {
-        display: inline-block;
-      }
-
-      .counter {
-        align-items: center;
-        display: flex;
-        gap: 1rem;
-        background: color-mix(in srgb, gold, transparent 70%);
-        border-radius: 0.5rem;
-      }
-
-      button {
-        font: inherit;
-        background: gold;
-        border: none;
-        padding: 0.5rem 1rem;
-
-        &:first-child {
-          border-radius: 0.5rem 0 0 0.5rem;
-        }
-
-        &:last-child {
-          border-radius: 0 0.5rem 0.5rem 0;
-        }
-      }
-    `;
-  }
-
   get template() {
-    return html`
+    return html`<style>
+        :host {
+          display: inline-block;
+        }
+
+        .counter {
+          align-items: center;
+          display: flex;
+          gap: 1rem;
+          background: color-mix(in srgb, gold, transparent 70%);
+          border-radius: 0.5rem;
+        }
+
+        button {
+          font: inherit;
+          background: gold;
+          border: none;
+          padding: 0.5rem 1rem;
+
+          &:first-child {
+            border-radius: 0.5rem 0 0 0.5rem;
+          }
+
+          &:last-child {
+            border-radius: 0 0.5rem 0.5rem 0;
+          }
+        }
+      </style>
+
       <div class="counter">
         <button data-on:click="decrement">Decrement</button>
         <output data-ref="output"></output>
         <button data-on:click="increment">Increment</button>
-      </div>
-    `;
+      </div> `;
   }
 
   connectedCallback() {
@@ -173,9 +157,7 @@ export class Counter extends C8 {
 
 Counter.define();
 
-/* -------------------------------------------------- *
- * Event delegation                                   *
- * -------------------------------------------------- */
+// Event delegation ---------------------------------------
 
 export class EventDelegation extends C8 {
   static tag = "c8-events";
